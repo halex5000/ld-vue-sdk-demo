@@ -1,48 +1,76 @@
+<!-- eslint-disable vue/no-ref-as-operand -->
 <script setup>
-import { ref } from "vue";
+import { store } from "../components/store";
+import { useLDReady } from "launchdarkly-vue-client-sdk";
 
-let items = ref([
-  {
-    color: "#A34FDE",
-    icon: "mdi-rocket-launch",
-    title: "Initialize LaunchDarkly client",
-    description: "Setup the LaunchDarkly client with an SDK key",
-  },
-]);
+const isLaunchDarklyReady = useLDReady();
 
-const loading = true;
+if (isLaunchDarklyReady) {
+  console.log("launch darkly is ready!");
+  store.completeItem("initialize");
+}
 </script>
 
 <template>
-  <v-timeline align="start">
+  <v-timeline align="start" style="color: white">
     <v-timeline-item
-      v-for="(item, i) in items"
+      v-for="(milestone, i) in store.milestones"
       :key="i"
-      :dot-color="item.color"
-      :icon="item.icon"
+      :dot-color="milestone.color"
+      :icon="milestone.icon"
       fill-dot
     >
+      <template #opposite>
+        <v-card width="225">
+          <v-card-text v-if="milestone.isComplete">
+            <v-icon
+              class="ma-2"
+              :color="milestone.color"
+              icon="mdi-check"
+            ></v-icon>
+            Mission Accomplished
+          </v-card-text>
+          <v-card-text v-else>
+            <v-icon
+              class="ma-2"
+              :color="milestone.color"
+              icon="mdi-alert"
+            ></v-icon>
+            Incomplete
+          </v-card-text>
+          <v-card v-if="milestone.isComplete && milestone.key === 'qr-code'">
+            <v-card-text>
+              <qrcode-vue
+                :value="value"
+                :size="size"
+                :foreground="foreground"
+                :background="background"
+              />
+            </v-card-text>
+          </v-card>
+        </v-card>
+      </template>
       <v-card
-        max-width="40%"
-        min-width="30%"
-        elevated
+        width="400"
+        height="150"
+        variant="tonal"
         rounded="true"
-        :loading="loading"
+        :color="milestone.color"
       >
-        <v-progress-linear
-          v-if="loading"
-          class="position-absolute"
-          style="z-index: 1"
-          color="#A34FDE"
-          height="10"
-          indeterminate
-        />
-        <v-card-title class="white text--primary text-h5">
-          {{ item.title }}
+        <v-card-title class="text--light text-h5">
+          {{ milestone.title }}
         </v-card-title>
-        <v-card-text class="white text--primary">
-          <p>{{ item.description }}</p>
+        <v-card-text class="text--primary">
+          <p>{{ milestone.description }}</p>
         </v-card-text>
+        <v-card-actions>
+          <v-btn variant="outlined">
+            Hint
+            <v-tooltip activator="parent" location="bottom">{{
+              milestone.hint
+            }}</v-tooltip>
+          </v-btn>
+        </v-card-actions>
       </v-card>
     </v-timeline-item>
   </v-timeline>

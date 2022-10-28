@@ -5,7 +5,7 @@ import TimeLine from "./components/Time-Line.vue";
 <template>
   <v-app>
     <v-main>
-      <div>
+      <div style="height: 100vh">
         <TimeLine />
       </div>
     </v-main>
