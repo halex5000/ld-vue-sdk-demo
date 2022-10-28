@@ -22,32 +22,22 @@ if (isLaunchDarklyReady) {
     >
       <template #opposite>
         <v-card width="225">
-          <v-card-text v-if="milestone.isComplete">
+          <v-card-subtitle v-if="milestone.isComplete">
             <v-icon
               class="ma-2"
               :color="milestone.color"
               icon="mdi-check"
             ></v-icon>
             Mission Accomplished
-          </v-card-text>
-          <v-card-text v-else>
+          </v-card-subtitle>
+          <v-card-subtitle v-else>
             <v-icon
               class="ma-2"
               :color="milestone.color"
               icon="mdi-alert"
             ></v-icon>
             Incomplete
-          </v-card-text>
-          <v-card v-if="milestone.isComplete && milestone.key === 'qr-code'">
-            <v-card-text>
-              <qrcode-vue
-                :value="value"
-                :size="size"
-                :foreground="foreground"
-                :background="background"
-              />
-            </v-card-text>
-          </v-card>
+          </v-card-subtitle>
         </v-card>
       </template>
       <v-card
