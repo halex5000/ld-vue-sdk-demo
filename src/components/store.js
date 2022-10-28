@@ -31,14 +31,17 @@ export const store = reactive({
     },
     {
       color: "#3DD6F5",
-      description: "Targeting with metadata",
+      description: "Target a specific user to show a new feature",
       icon: "mdi-bullseye-arrow",
       key: "targeting",
-      title: "QR Code Color",
-      hint: "Target a device or user with a color scheme",
+      title: "User Targeting",
+      hint: "Target a user to show them debug information",
       isComplete: false,
     },
   ],
+  setActiveUser(username) {
+    this.username = username;
+  },
   completeItem(key) {
     this.milestones = this.milestones.map((eachItem) => {
       if (eachItem.key === key) {
