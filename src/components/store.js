@@ -42,6 +42,9 @@ export const store = reactive({
   setActiveUser(username) {
     this.username = username;
   },
+  resetActiveUser() {
+    this.username = null;
+  },
   completeItem(key) {
     this.milestones = this.milestones.map((eachItem) => {
       if (eachItem.key === key) {
