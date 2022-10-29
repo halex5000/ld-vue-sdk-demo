@@ -49,7 +49,7 @@ const themeSwitcher = useLDFlag("theme-switcher", false);
           </v-card-subtitle>
         </v-card>
       </template>
-      <v-card width="550" height="150" variant="elevated">
+      <v-card width="540" height="150" variant="elevated">
         <v-card-title class="text--light text-h5">
           {{ milestone.title }}
         </v-card-title>
@@ -68,7 +68,7 @@ const themeSwitcher = useLDFlag("theme-switcher", false);
         </v-card-actions>
       </v-card>
     </v-timeline-item>
-    <v-timeline-item v-if="themeSwitcher" dot-color="#EBFF38" fill-dot>
+    <v-timeline-item dot-color="#EBFF38" fill-dot>
       <template #icon>
         <v-icon icon="mdi-compare" variant="text" color="#282828"></v-icon>
       </template>
@@ -86,7 +86,7 @@ const themeSwitcher = useLDFlag("theme-switcher", false);
           </v-card-subtitle>
         </v-card>
       </template>
-      <v-card width="500" height="150" variant="elevated">
+      <v-card v-if="themeSwitcher" width="500" height="150" variant="elevated">
         <v-card-title class="text-h5"> Theme Switcher Unlocked! </v-card-title>
         <v-card-text class="text--primary">
           <p>You've unlocked the theme switcher!</p>

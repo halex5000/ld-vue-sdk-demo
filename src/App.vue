@@ -59,12 +59,12 @@ watchEffect(() => {
           </v-navigation-drawer>
           <v-col
             cols="1"
-            style="min-width: 100px; max-width: 100%"
+            style="min-width: 100px; max-width: 90%"
             class="flex-grow-1 flex-shrink-0"
           >
             <TimeLine />
           </v-col>
-          <v-navigation-drawer permanent location="right">
+          <v-navigation-drawer permanent location="right" class="pl-10">
             <QRCode
               v-if="qrCode"
               :background="background"
