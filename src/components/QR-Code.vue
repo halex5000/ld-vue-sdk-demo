@@ -12,8 +12,8 @@ defineProps({
 </script>
 
 <template>
-  <v-sheet class="elevation-24" rounded min-width="200">
-    <v-img class="px-7 py-6">
+  <v-sheet class="elevation-24" rounded min-width="225">
+    <v-img class="mr-6 mt-5">
       <qrcode-vue
         v-if="value"
         :value="value"
