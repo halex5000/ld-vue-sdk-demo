@@ -81,7 +81,10 @@ const themeSwitcher = useLDFlag("theme-switcher", false);
             Mission Accomplished
           </v-card-subtitle>
           <v-card-subtitle v-else>
-            <v-icon class="ma-2" color="#EBFF38" icon="mdi-alert"></v-icon>
+            <v-btn class="ma-2 elevation-24" color="#EBFF38" icon
+              ><v-icon class="ma-2" color="#282828" icon="mdi-alert"></v-icon
+            ></v-btn>
+
             Incomplete
           </v-card-subtitle>
         </v-card>
