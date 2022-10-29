@@ -3,6 +3,7 @@
 import { store } from "../components/store";
 import { useLDReady } from "launchdarkly-vue-client-sdk";
 import { useTheme } from "vuetify";
+import { useLDFlag } from "launchdarkly-vue-client-sdk";
 
 const isLaunchDarklyReady = useLDReady();
 
@@ -18,7 +19,7 @@ const toggleTheme = () => {
   store.completeMission();
 };
 
-// const themeSwitcher = useLDFlag("theme-switcher", false);
+const themeSwitcher = useLDFlag("theme-switcher", false);
 </script>
 
 <template>
@@ -67,7 +68,7 @@ const toggleTheme = () => {
         </v-card-actions>
       </v-card>
     </v-timeline-item>
-    <v-timeline-item dot-color="#EBFF38" fill-dot>
+    <v-timeline-item v-if="themeSwitcher" dot-color="#EBFF38" fill-dot>
       <template #icon>
         <v-icon icon="mdi-compare" variant="text" color="#282828"></v-icon>
       </template>
