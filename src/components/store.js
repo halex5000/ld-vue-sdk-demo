@@ -4,29 +4,30 @@ export const store = reactive({
   milestones: [
     {
       color: "#A34FDE",
-      description: "Feature management enabled",
+      description: "Enable feature management in your Vue app",
       icon: "mdi-flag-outline",
       key: "initialize",
       title: "Powered by LaunchDarkly",
-      hint: "Add your SDK key to the .env file",
+      hint: "Add your SDK key to the .env file and initialize the client",
       isComplete: false,
     },
     {
       color: "#405BFF",
-      description: "Boolean flag use",
+      description: "Use a boolean flag, a toggle, to unlock a new feature",
       icon: "mdi-toggle-switch",
       key: "qr-code",
-      title: "QR Code Available",
-      hint: "Turn on the QR Code Flag",
+      title: "Your First Flag",
+      hint: "Turn on the QR Code flag in LaunchDarkly",
       isComplete: false,
     },
     {
       color: "#FF386B",
-      description: "Multivariate string used to style QR Code",
+      description:
+        "Feature flags are more than toggles, they can be strings, numbers, or objects",
       icon: "mdi-all-inclusive",
       key: "beyond-the-boolean",
       title: "Beyond the Boolean",
-      hint: "Relese a new color scheme for the QR Code",
+      hint: "Turn on and set a new foreground and background color for the QR Code",
       isComplete: false,
     },
     {
@@ -45,11 +46,26 @@ export const store = reactive({
   resetActiveUser() {
     this.username = null;
   },
+  completeMission() {
+    this.missionComplete = true;
+  },
+  resetMission() {
+    this.missionComplete = false;
+  },
   completeItem(key) {
     this.milestones = this.milestones.map((eachItem) => {
       if (eachItem.key === key) {
-        console.log(`updating item: ${eachItem.key}`);
+        console.log(`completing item: ${eachItem.key}`);
         return { ...eachItem, isComplete: true };
+      }
+      return eachItem;
+    });
+  },
+  uncompleteItem(key) {
+    this.milestones = this.milestones.map((eachItem) => {
+      if (eachItem.key === key) {
+        console.log(`uncompleting item: ${eachItem.key}`);
+        return { ...eachItem, isComplete: false };
       }
       return eachItem;
     });

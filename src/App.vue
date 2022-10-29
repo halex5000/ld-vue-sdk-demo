@@ -6,22 +6,45 @@ import { useLDFlag } from "launchdarkly-vue-client-sdk";
 import { store } from "./components/store";
 import { watchEffect } from "vue";
 import Login from "./components/Login.vue";
-const qrCode = useLDFlag("qr-code", false);
-const login = useLDFlag("login", false);
-const foreground = useLDFlag("qr-background-color", "#FFFFFF");
-const background = useLDFlag("qr-foreground-color", "#282828");
+
+const qrCodeKey = "qr-code";
+const loginKey = "login";
+
+const qrCode = useLDFlag(qrCodeKey, false);
+const login = useLDFlag(loginKey, false);
+
+const baseBackgroundColor = "#282828";
+const baseForegroundColor = "#FFFFFF";
+const beyondTheBooleanKey = "beyond-the-boolean";
+const targetingKey = "targeting";
+
+const foreground = useLDFlag("qr-background-color", baseBackgroundColor);
+const background = useLDFlag("qr-foreground-color", baseForegroundColor);
 
 watchEffect(() => {
   if (qrCode.value) {
-    store.completeItem("qr-code");
-  }
+    store.completeItem(qrCodeKey);
 
-  if (login.value) {
-    store.completeItem("targeting");
-  }
+    if (login.value) {
+      store.completeItem(targetingKey);
+    } else {
+      store.uncompleteItem(targetingKey);
+    }
 
-  if (foreground.value && background.value) {
-    store.completeItem("beyond-the-boolean");
+    if (
+      background.value === baseBackgroundColor ||
+      foreground.value === baseForegroundColor
+    ) {
+      console.log("background color is at base");
+      store.uncompleteItem(beyondTheBooleanKey);
+    } else {
+      store.completeItem(beyondTheBooleanKey);
+    }
+  } else {
+    store.uncompleteItem(qrCodeKey);
+    store.uncompleteItem(beyondTheBooleanKey);
+    store.uncompleteItem(targetingKey);
+    store.resetMission();
   }
 });
 </script>
