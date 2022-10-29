@@ -35,7 +35,7 @@ export const store = reactive({
       icon: "mdi-bullseye-arrow",
       key: "targeting",
       title: "User Targeting",
-      hint: "Target a user to show them debug information",
+      hint: "Target a user to show them a new feature!",
       isComplete: false,
     },
   ],

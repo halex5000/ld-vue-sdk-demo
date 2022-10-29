@@ -17,7 +17,7 @@ watchEffect(() => {
   }
 
   if (login.value) {
-    store.completeItem("login");
+    store.completeItem("targeting");
   }
 
   if (foreground.value && background.value) {

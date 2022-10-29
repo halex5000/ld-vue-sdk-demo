@@ -11,9 +11,9 @@ const launchDarklyClient = useLDClient();
 const login = () => {
   console.log("username is ", username.value);
   launchDarklyClient.identify({
-    key: username,
+    key: username.value,
   });
-  store.setActiveUser(username);
+  store.setActiveUser(username.value);
 };
 
 const logout = () => {
